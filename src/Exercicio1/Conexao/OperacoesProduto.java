@@ -54,7 +54,12 @@ public class OperacoesProduto {
     public Integer getIDlist(int id){
 
         List<Produto> idlista = this.getlistaID();
-        System.out.println(idlista.get(id).getId());
+        try{
+            System.out.println("Id na posicao : " + idlista.get(id).getId());
+
+        }catch (IndexOutOfBoundsException i){
+            System.out.println("Nao existe nenhum produto cadastrado nesta opcao");
+        }
         return idlista.get(id).getId();
     }
 

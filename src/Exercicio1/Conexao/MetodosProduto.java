@@ -2,7 +2,7 @@ package Exercicio1.Conexao;
 
 import java.sql.Connection;
 import java.sql.SQLException;
-import java.util.List;
+
 
 public class MetodosProduto {
     public static void InsereProduto() throws SQLException {
@@ -27,7 +27,7 @@ public class MetodosProduto {
     }
     public void DeletaProduto(Integer id) throws SQLException{
             try(Connection connection = (Connection) new ConnectionFactory().recuperarConexao()){
-                new OperacoesProduto(connection).deletaProduto(new OperacoesProduto(connection).getIDlist(id));
+                    new OperacoesProduto(connection).deletaProduto(new OperacoesProduto(connection).getIDlist(id));
             }
     }
 }
