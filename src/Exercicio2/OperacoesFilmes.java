@@ -50,15 +50,17 @@ public class OperacoesFilmes {
             return listaFilmes;
 
     }
-    public Integer exibeFilmes(){
-
+    public Integer exibeFilmes(Integer i){
         List<Filmes> listaFilmes = this.getlistaFilmes();
+        System.out.println(listaFilmes.size());
         try{
-            System.out.println("Id na posicao : " + listaFilmes.get(0).getNome());
-
-        }catch (IndexOutOfBoundsException i){
+            System.out.println("Id na posicao : " + listaFilmes.get(i).getNome());
+            System.out.println("Nome: " + listaFilmes.get(i).getNome() + " | Descricao: "+ listaFilmes.get(i).getDescricao() + " | Ano: "+ listaFilmes.get(i).getAno());
+            return 1;
+        }catch (IndexOutOfBoundsException ind){
             System.out.println("Nao existe nenhum produto cadastrado nesta opcao");
+            return 0;
         }
-        return listaFilmes.get(0).getId();
+
     }
 }
