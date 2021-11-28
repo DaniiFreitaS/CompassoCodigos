@@ -1,6 +1,8 @@
 package Exercicio1.Conexao;
 
+import java.sql.Connection;
 import java.sql.SQLException;
+import java.util.List;
 import java.util.Scanner;
 
 public class Principal {
@@ -21,7 +23,8 @@ public class Principal {
                     break;
 
                 case 3:
-                    mp.DeletaProduto();
+
+                    mp.DeletaProduto(1);
                     break;
 
             }

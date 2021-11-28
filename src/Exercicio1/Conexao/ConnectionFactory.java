@@ -17,8 +17,13 @@ public class ConnectionFactory {
 		comboPooledDataSource.setPassword("2424");
 		this.dataSource = comboPooledDataSource;
 	}
-	public Connection recuperarConexao() throws SQLException {
-		return this.dataSource.getConnection();
+	public Connection recuperarConexao() {
+		try {
+			return this.dataSource.getConnection();
+		}catch (SQLException e) {
+			throw new RuntimeException(e);
+		}
+
 	}
 
 }

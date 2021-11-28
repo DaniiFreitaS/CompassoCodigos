@@ -1,11 +1,37 @@
 package Exercicio1.Conexao;
 
 import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
 
 public class OperacoesProduto {
     private Connection connection;
     public OperacoesProduto(Connection connection){
         this.connection = connection;
+    }
+    public List<Produto> getlistaID() {
+        List<Produto> listaID = new ArrayList<Produto>();
+        try {
+            String sql = "SELECT ID FROM PRODUTOS";
+
+            try (PreparedStatement pstm = connection.prepareStatement(sql)) {
+                pstm.execute();
+
+                transformaListaID(listaID, pstm);
+            }
+            return listaID;
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+    private void transformaListaID(List<Produto> ID, PreparedStatement pstm) throws SQLException {
+        try (ResultSet rst = pstm.getResultSet()) {
+            while (rst.next()) {
+                Produto listaID = new Produto(rst.getInt(1));
+
+                ID.add(listaID);
+            }
+        }
     }
     public void salvaProduto(Produto produto) throws SQLException{
         String sql = "INSERT INTO PRODUTOS (NOME, DESCRICAO, QUANTIDADE, PRECO) VALUES (?,?,?,?)";
@@ -25,9 +51,15 @@ public class OperacoesProduto {
             }
         }
     }
+    public Integer getIDlist(int id){
+
+        List<Produto> idlista = this.getlistaID();
+        System.out.println(idlista.get(id).getId());
+        return idlista.get(id).getId();
+    }
+
     public void deletaProduto(Integer id) throws SQLException{
         String sql = "DELETE FROM PRODUTOS WHERE ID = ?";
-
         try(PreparedStatement pstm = connection.prepareStatement(sql)) {
             pstm.setInt(1, id);
             pstm.execute();
