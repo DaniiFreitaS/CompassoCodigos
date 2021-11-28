@@ -16,17 +16,21 @@ public class Principal {
             select = sc.nextInt();
             switch (select) {
                 case 1:
-                    mp.InsereProduto();
+                    //metodo estatico que insere automaticamente 3 produtos do banco de dados
+                    mp.InsereProduto();//insercao automatica de 3 produtos
                     break;
                 case 2:
-                    //func a ser implementada
+                    //metodo com possibilidade de selecionar qualquer posicao a ser atualizada
+                    mp.AtualizaProduto(0);//posicao 1 da lista de id no banco de dados
                     break;
 
                 case 3:
-
-                    mp.DeletaProduto(1);
+                    //metodo com possibilidade de selecionar qualquer posicao a ser deletada
+                    mp.DeletaProduto(1);// posicao 2 da lista de id no banco de dados
                     break;
-
+                case 0:
+                    System.out.println("Finalizando aplicacao");
+                    break;
             }
         }while (select != 0);
 

@@ -18,6 +18,13 @@ public class MetodosProduto {
 
         }
     }
+    public void AtualizaProduto(Integer id) throws SQLException {
+        Produto produto = new Produto("esteira branca", "esteira eletrica branca com 23 velocidades", 5, 2200);
+        try(Connection connection = (Connection) new ConnectionFactory().recuperarConexao()){
+            new OperacoesProduto(connection).atualizaProduto(produto,new OperacoesProduto(connection).getIDlist(id));
+        }
+
+    }
     public void DeletaProduto(Integer id) throws SQLException{
             try(Connection connection = (Connection) new ConnectionFactory().recuperarConexao()){
                 new OperacoesProduto(connection).deletaProduto(new OperacoesProduto(connection).getIDlist(id));

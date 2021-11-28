@@ -67,4 +67,23 @@ public class OperacoesProduto {
             throw new RuntimeException(e);
         }
     }
+    public void atualizaProduto(Produto produto, Integer id) throws SQLException{
+        String sql = "UPDATE PRODUTOS SET NOME = ?, DESCRICAO = ?, QUANTIDADE = ?, PRECO = ? WHERE ID = ?";
+
+        try(PreparedStatement pstm = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)){
+            pstm.setString(1, produto.getNome());
+            pstm.setString(2, produto.getDescricao());
+            pstm.setInt(3, produto.getQuantidade());
+            pstm.setInt(4, produto.getPreco());
+            pstm.setInt(5, id);
+
+            pstm.execute();
+
+            try(ResultSet rst = pstm.getGeneratedKeys()) {
+                while (rst.next()){
+                    produto.setId(rst.getInt(1));
+                }
+            }
+        }
+    }
 }
